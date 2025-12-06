@@ -1,0 +1,20 @@
+package "ZONE 5 — Proactive Alert Flow (08:00 → 08:15)" {
+
+  Machines --> ProcessSensors : "08:00\nBatch +20% Dye"
+  ProcessSensors --> Ingest
+  Ingest --> SourceModel : "COD Source = 180 mg/L"
+  SourceModel --> Rules
+
+  Rules --> OutletModel : "Request Outlet Prediction"
+  OutletModel --> Rules : "COD = 125 mg/L (>100)"
+
+  Rules --> EnergyPred : "Check Energy Spike"
+  EnergyPred --> Rules : "Energy Waste Alert"
+
+  Rules --> Notify : "EARLY WARNING (08:15)"
+
+  Rules --> PrescAI : "Request Action Plan"
+  PrescAI --> Rules : "Reduce Dye\nIncrease PAC\nReroute Flow\nOptimize Heating"
+
+  Rules --> Dashboard : "Display Alerts + Actions"
+}

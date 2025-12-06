@@ -1,0 +1,20 @@
+package "ZONE 4 — Dashboards + Business Engine" {
+
+  component "Apache Superset\nRealtime + Forecast + ROI" <<Dash>> as Dashboard
+  component "Notification System\nSMS / Email / Zalo" <<Dash>> as Notify
+  component "Shared Truth Dashboard\nGain-Share Transparency" <<Dash>> as TruthBoard
+
+  component "Subscription Manager" <<Biz>> as SubMgr
+  component "Gain-Share Calculator" <<Biz>> as GainCalc
+  component "Green Finance Connector" <<Biz>> as GreenFinance
+}
+
+Rules --> Notify
+Rules --> Dashboard
+PrescAI --> Dashboard
+
+Dashboard --> GainCalc
+GainCalc --> TruthBoard
+GainCalc --> GreenFinance
+
+SubMgr --> ManagerActor : "Billing Info"

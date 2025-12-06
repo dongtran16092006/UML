@@ -1,0 +1,40 @@
+@startuml WastewaterAI_MegaArchitecture
+!pragma layout elk
+!pragma jvm_memory 4096m
+skinparam maxMessageSize 500000
+skinparam svgSizeLimit 300000
+scale max 30000 width
+
+' ========== COLORS ==========
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam dpi 180
+
+left to right direction
+skinparam ranksep 22
+skinparam nodesep 26
+
+' Load 5 zones
+!include WastewaterAI_Zone1_Factory.puml
+!include WastewaterAI_Zone2_DataAI.puml
+!include WastewaterAI_Zone3_SecurityOps.puml
+!include WastewaterAI_Zone4_DashboardBiz.puml
+!include WastewaterAI_Zone5_ProactiveFlow.puml
+
+' ========== ACTORS ==========
+actor "Operator" as Operator
+actor "Environmental Engineer" as EnvEng
+actor "Manager / CEO / CFO" as ManagerActor
+actor "System Integrator" as SI
+actor "Green Finance Org" as GFO
+
+Operator --> Dashboard
+EnvEng --> Dashboard
+ManagerActor --> Dashboard
+GFO --> TruthBoard
+
+SI --> Gateway
+SI --> ProcessSensors
+SI --> PLC
+
+@enduml

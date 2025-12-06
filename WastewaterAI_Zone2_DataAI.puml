@@ -1,0 +1,48 @@
+package ZONE 2 — Data Platform + AI Engine {
+
+  component Ingestion ServicenJSON Parsing + Validation AI as Ingest
+  database Raw Data Laken(JSON Logs) as RawDB
+  database Normalized SQL DBnFeatures as NormDB
+
+  package AI Engine {
+    component Causal AInCause–Effect Modeling AI as CausalAI
+    component Time-Series ModelnLSTMTransformer AI as TSModel
+    component Energy Forecast ModelnkWh + Peaks AI as EnergyPred
+    component Water Loop OptimizationnRecycle Routing AI as WaterLoop
+    component At-Source Regression AI as SourceModel
+    component At-Outlet Mixing Model AI as OutletModel
+    component Model Drift Detector AI as Drift
+    component Prescriptive AInPAC + Aeration + Energy AI as PrescAI
+  }
+
+  component Rule Engine + Safety Net AI as Rules
+}
+
+Gateway -- Ingest
+Ingest -- RawDB
+Ingest -- NormDB
+
+Ingest -- TSModel
+Ingest -- SourceModel
+Ingest -- OutletModel
+Ingest -- CausalAI
+Ingest -- EnergyPred
+
+TSModel -- Rules
+SourceModel -- Rules
+OutletModel -- Rules
+EnergyPred -- Rules
+
+CausalAI -- TSModel
+CausalAI -- SourceModel
+CausalAI -- OutletModel
+
+Rules -- PrescAI
+PrescAI -- Rules
+
+Drift -- TSModel
+Drift -- OutletModel
+Drift -- EnergyPred
+
+Rules -- WaterLoop
+WaterLoop -- Rules

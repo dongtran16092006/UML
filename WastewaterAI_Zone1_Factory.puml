@@ -1,0 +1,19 @@
+package "ZONE 1 — Factory & Sensor Layer (Edge-IoT)" {
+
+  component "Dyeing Machines\nWashing Machines" <<IoT>> as Machines
+  component "Process Sensors\npH, Temp, Flow, Chemical Dose,\nEnergy (kWh), Load" <<IoT>> as ProcessSensors
+  component "Source Sensors\n(Source → Equalization Tank)" <<IoT>> as SourceSensors
+  component "Outlet Sensors\n(Final Discharge COD/TSS/Color)" <<IoT>> as OutletSensors
+  component "Energy Meter\n(Real-time Power)" <<IoT>> as EnergyMeter
+  component "PLC / RTU\nModbus RTU/TCP" <<IoT>> as PLC
+  component "IoT Gateway\nModbus→JSON" <<IoT>> as Gateway
+  component "Legacy Machine Adapter\nRetrofit Sensors" <<IoT>> as LegacyAdapter
+}
+
+Machines --> ProcessSensors
+ProcessSensors --> PLC
+SourceSensors --> PLC
+OutletSensors --> PLC
+EnergyMeter --> PLC
+LegacyAdapter --> PLC
+PLC --> Gateway : "Modbus Streams"
