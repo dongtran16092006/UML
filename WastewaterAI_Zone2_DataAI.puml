@@ -1,4 +1,4 @@
-package ZONE 2 — Data Platform + AI Engine {
+package ZONE 2 - Data Platform + AI Engine {
 
   component Ingestion ServicenJSON Parsing + Validation AI as Ingest
   database Raw Data Laken(JSON Logs) as RawDB
