@@ -1,0 +1,24 @@
+package "ZONE 3 — Security, QA, Monitoring" {
+
+  component "RBAC + Audit Trail" <<Sec>> as RBAC
+  component "Data Masking\n(Dye Formulas)" <<Sec>> as Masking
+  component "Encryption Layer\nAES-256 + NAS" <<Sec>> as Encrypt
+  component "Network Segmentation\nVLAN PROD / MGMT / OFFICE" <<Sec>> as Seg
+
+  component "Sensor Health Engine\nVariance + ROC" <<Ops>> as SensorHealth
+  component "Input Validation Pipeline\nFiltering + Sanity Checks" <<Ops>> as InputValidate
+  component "Model Retraining Manager\nVersioning + Rollback" <<Ops>> as RetrainMgr
+}
+
+Ingest --> InputValidate
+ProcessSensors --> SensorHealth
+SourceSensors --> SensorHealth
+OutletSensors --> SensorHealth
+EnergyMeter --> SensorHealth
+
+SensorHealth --> Ingest
+
+Drift --> RetrainMgr
+RetrainMgr --> TSModel
+RetrainMgr --> OutletModel
+RetrainMgr --> EnergyPred
